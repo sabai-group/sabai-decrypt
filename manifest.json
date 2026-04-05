@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "SABAI Decrypt",
+  "version": "1.0.0",
+  "description": "Decrypts BYOS-encrypted supplier names on the Sabai365 web portal. Your decryption key never leaves your browser.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sabai365.com/*",
+        "https://*.sabai365.com/*",
+        "https://sabai365-16c4b4eee4fe.herokuapp.com/*",
+        "http://localhost:5173/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 320px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .status.configured {
+      background: rgba(46, 204, 113, 0.12);
+      color: #2ecc71;
+    }
+
+    .status.not-configured {
+      background: rgba(231, 76, 60, 0.12);
+      color: #e74c3c;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status.configured .dot { background: #2ecc71; }
+    .status.not-configured .dot { background: #e74c3c; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #aaa;
+    }
+
+    .input-wrap {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 8px 36px 8px 10px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background: #16213e;
+      color: #e0e0e0;
+      font-size: 13px;
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus { border-color: #5a67d8; }
+
+    .toggle-vis {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px;
+    }
+
+    .toggle-vis:hover { color: #ccc; }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      flex: 1;
+      padding: 8px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    button:hover { opacity: 0.85; }
+
+    .btn-save {
+      background: #5a67d8;
+      color: #fff;
+    }
+
+    .btn-clear {
+      background: #333;
+      color: #ccc;
+    }
+
+    .toast {
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      text-align: center;
+      display: none;
+    }
+
+    .toast.success {
+      display: block;
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ecc71;
+    }
+  </style>
+</head>
+<body>
+  <h1>SABAI Decrypt</h1>
+  <p class="subtitle">Supplier name decryption for Sabai365</p>
+
+  <div id="status" class="status not-configured">
+    <span class="dot"></span>
+    <span id="status-text">No key configured</span>
+  </div>
+
+  <label for="key-input">Encryption Key</label>
+  <div class="input-wrap">
+    <input type="password" id="key-input" placeholder="Enter your SECRET_ENCRYPTION_KEY" autocomplete="off" spellcheck="false">
+    <button class="toggle-vis" id="toggle-vis" type="button" title="Toggle visibility">&#128065;</button>
+  </div>
+
+  <div class="actions">
+    <button class="btn-save" id="btn-save">Save Key</button>
+    <button class="btn-clear" id="btn-clear">Clear</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

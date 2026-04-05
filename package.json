@@ -1,0 +1,16 @@
+{
+  "name": "sabai-decrypt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension that decrypts BYOS-encrypted supplier names on the Sabai365 web portal",
+  "scripts": {
+    "build": "esbuild src/content.ts src/popup.ts --bundle --outdir=dist --format=iife --target=chrome120",
+    "watch": "esbuild src/content.ts src/popup.ts --bundle --outdir=dist --format=iife --target=chrome120 --watch",
+    "package": "npm run build && cp manifest.json dist/ && cp -r icons dist/ && cp src/popup.html dist/"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.3"
+  }
+}
