@@ -42,6 +42,28 @@ function collectTextNodes(root: Node): Text[] {
   return nodes;
 }
 
+/**
+ * Gmail (and some other clients) inject <wbr> elements into long unbreakable
+ * strings so they wrap nicely. Our base64 ciphertext is exactly that, so a
+ * single ⌁ENC:… token can be split into multiple sibling text nodes inside
+ * the same parent, and no individual text node holds a valid token.
+ *
+ * Strip <wbr>s whose parent's combined textContent contains the prefix, then
+ * normalize() so the surrounding text nodes coalesce back into one.
+ */
+function mergeWbrSplitTokens(root: Node): void {
+  const scope = root.nodeType === Node.ELEMENT_NODE ? (root as Element) : document.body;
+  const parents = new Set<Element>();
+  scope.querySelectorAll("wbr").forEach((w) => {
+    const p = w.parentElement;
+    if (p && hasPrefix(p.textContent ?? "")) {
+      w.remove();
+      parents.add(p);
+    }
+  });
+  parents.forEach((p) => p.normalize());
+}
+
 async function scanSubtree(root: Node): Promise<void> {
   if (!secret) return;
   // Check if root itself is a text node
@@ -49,6 +71,7 @@ async function scanSubtree(root: Node): Promise<void> {
     await decryptTextNode(root as Text);
     return;
   }
+  mergeWbrSplitTokens(root);
   const nodes = collectTextNodes(root);
   await Promise.all(nodes.map(decryptTextNode));
 }
