@@ -72,7 +72,6 @@ Then on `chrome://extensions/`, click the **Reload** icon on the SABAI Decrypt c
 The extension only runs on origins listed under `content_scripts[0].matches` in [`manifest.json`](manifest.json):
 
 - `https://sabai365.com/*` and subdomains
-- The Heroku staging URL
 - `http://localhost:5173/*` (Vite dev server)
 - `https://mail.google.com/*` (so encrypted names in Sabai365 alert emails are decrypted in Gmail)
 

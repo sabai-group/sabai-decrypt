@@ -20,9 +20,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://sabai365.com/*",
-        "https://*.sabai365.com/*",
-        "https://sabai365-16c4b4eee4fe.herokuapp.com/*",
+        "https://*.sabai365.ai/*",
+        "https://365.sabai.group/*",
         "http://localhost:5173/*",
         "https://mail.google.com/*"
       ],
