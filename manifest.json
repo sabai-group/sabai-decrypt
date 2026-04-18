@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "SABAI Decrypt",
   "version": "1.0.0",
-  "description": "Decrypts BYOS-encrypted supplier names on the Sabai365 web portal. Your decryption key never leaves your browser.",
+  "description": "Decrypts BYOS-encrypted supplier and buyer names on the Sabai365 web portal and Gmail. Your decryption key never leaves your browser.",
   "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html",
@@ -23,7 +23,8 @@
         "https://sabai365.com/*",
         "https://*.sabai365.com/*",
         "https://sabai365-16c4b4eee4fe.herokuapp.com/*",
-        "http://localhost:5173/*"
+        "http://localhost:5173/*",
+        "https://mail.google.com/*"
       ],
       "js": ["content.js"],
       "run_at": "document_idle"
