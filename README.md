@@ -32,65 +32,12 @@ This matches the encryption in [BYOS `relay.ts`](https://github.com/sabai-group/
 
 ## Installation
 
-There are two ways to install the extension:
+- **End users:** follow the step-by-step guide in **[INSTALL.md](INSTALL.md)** — download the latest release zip, load it as an unpacked extension, paste in your key. No command line required.
+- **Auditors and developers:** see [Build from source](#build-from-source) below.
 
-- **[Install from a release](#install-from-a-release)** — recommended for everyday users. Download a pre-built `.zip` and load it as an unpacked extension.
-- **[Build from source](#build-from-source)** — for auditors and developers who want to compile the extension themselves.
-
-Both methods produce the same Chrome MV3 extension; the release zip is built by [this GitHub Actions workflow](.github/workflows/release.yml) directly from a tagged commit, so its contents are exactly reproducible from source.
-
-### Install from a release
-
-#### 1. Download the latest zip
-
-Go to the [Releases page](https://github.com/sabai-group/sabai-decrypt/releases/latest) and download the `sabai-decrypt-vX.Y.Z.zip` asset under **Assets**.
-
-#### 2. Unzip it
-
-Extract the archive somewhere stable on your machine — for example `~/Applications/sabai-decrypt/`. **Do not delete this folder after loading**: Chrome reads the extension's files from disk every time it starts, so the folder must stick around.
-
-#### 3. Open the Chrome extensions page and enable Developer mode
-
-In a new tab, go to [`chrome://extensions`](chrome://extensions) (Chrome blocks `chrome://` links, so you'll need to paste the URL).
-
-Toggle **Developer mode** on in the top right corner, then click **Load unpacked** in the top left.
-
-![Chrome extensions page with Developer mode and Load unpacked highlighted](docs/images/extensions-page.png)
-
-> Screenshot from the [Chrome for Developers documentation](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-In the file picker, select the **folder you just unzipped** (the one that contains `manifest.json` directly).
-
-#### 4. Pin the extension to your toolbar
-
-Click the puzzle-piece icon in the Chrome toolbar, find **SABAI Decrypt**, and click the pin icon next to it.
-
-![Pinning an extension to the Chrome toolbar](docs/images/pin-extension.png)
-
-> Screenshot from the [Chrome for Developers documentation](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-#### 5. Configure your decryption key
-
-1. Click the **SABAI Decrypt** icon in the toolbar.
-2. Paste your `SECRET_ENCRYPTION_KEY` (the same key configured in your BYOS instance) into the input.
-3. Click **Save Key**.
-4. Reload any open Sabai365 or Gmail tab — encrypted names will now be decrypted automatically.
-
-#### Updating to a newer release
-
-1. Download the new `sabai-decrypt-vX.Y.Z.zip` from the [Releases page](https://github.com/sabai-group/sabai-decrypt/releases).
-2. Replace the contents of the folder you originally unzipped (delete the old files, drop in the new ones).
-3. Open `chrome://extensions/` and click the reload icon on the SABAI Decrypt card.
-
-![Reload icon on the extensions page](docs/images/reload-extension.png)
-
-> Screenshot from the [Chrome for Developers documentation](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-Your saved key is preserved across reloads.
+Both paths produce the same Chrome MV3 extension; the release zip is built by [`.github/workflows/release.yml`](.github/workflows/release.yml) directly from a tagged commit, so its contents are exactly reproducible from source.
 
 ### Build from source
-
-This path is for auditors and developers — the output is identical to what's published to the Releases page.
 
 ```bash
 git clone https://github.com/sabai-group/sabai-decrypt.git
@@ -99,15 +46,14 @@ npm install
 npm run package
 ```
 
-This produces a loadable folder at `dist/`. Then follow [step 3](#3-open-the-chrome-extensions-page-and-enable-developer-mode) onwards above, selecting `dist/` instead of the unzipped folder.
+This produces a loadable folder at `dist/`. Then in Chrome:
 
-To rebuild after editing source:
+1. Go to `chrome://extensions/`.
+2. Enable **Developer mode** (top right).
+3. Click **Load unpacked** and select the `dist/` folder.
+4. Click the extension's toolbar icon, paste your `SECRET_ENCRYPTION_KEY`, click **Save Key**.
 
-```bash
-npm run package
-```
-
-Then click the reload icon on the extension's card in `chrome://extensions/`.
+To rebuild after editing source, run `npm run package` and click the reload icon on the extension's card in `chrome://extensions/`.
 
 ## Supported origins
 
