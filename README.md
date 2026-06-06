@@ -32,7 +32,9 @@ This matches the encryption in [BYOS `relay.ts`](https://github.com/sabai-group/
 
 ## Installation
 
-- **End users:** follow the step-by-step guide in **[INSTALL.md](INSTALL.md)** — download the latest release zip, load it as an unpacked extension, paste in your key. No command line required.
+**[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/sabai-decrypt/hmcjafmbenhblaknjicdoccnibkladdl)** — click **Add to Chrome**, then open the extension popup and paste your `SECRET_ENCRYPTION_KEY`.
+
+- **Manual install (unpacked):** follow the step-by-step guide in **[INSTALL.md](INSTALL.md)** — download the latest release zip, load it as an unpacked extension, paste in your key. No command line required.
 - **Auditors and developers:** see [Build from source](#build-from-source) below.
 
 Both paths produce the same Chrome MV3 extension; the release zip is built by [`.github/workflows/release.yml`](.github/workflows/release.yml) directly from a tagged commit, so its contents are exactly reproducible from source.
